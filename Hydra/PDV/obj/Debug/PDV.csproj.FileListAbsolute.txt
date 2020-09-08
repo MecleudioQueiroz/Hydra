@@ -1,0 +1,63 @@
+C:\Users\Programador\source\repos\HydraSistemas\PDV\bin\Debug\PDV.exe.config
+C:\Users\Programador\source\repos\HydraSistemas\PDV\bin\Debug\PDV.exe
+C:\Users\Programador\source\repos\HydraSistemas\PDV\bin\Debug\PDV.pdb
+C:\Users\Programador\source\repos\HydraSistemas\PDV\bin\Debug\MaterialDesignColors.dll
+C:\Users\Programador\source\repos\HydraSistemas\PDV\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Programador\source\repos\HydraSistemas\PDV\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Programador\source\repos\HydraSistemas\PDV\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Programador\source\repos\HydraSistemas\PDV\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV.csprojAssemblyReference.cache
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\MainWindow.g.cs
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\App.g.cs
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV_MarkupCompile.cache
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV_MarkupCompile.lref
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\MainWindow.baml
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV.g.resources
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV.Properties.Resources.resources
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV.csproj.GenerateResource.cache
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV.csproj.CoreCompileInputs.cache
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV.csproj.CopyComplete
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV.exe
+C:\Users\Programador\source\repos\HydraSistemas\PDV\obj\Debug\PDV.pdb
+C:\Projetos Windows Forms\HydraSistemas\PDV\bin\Debug\PDV.exe.config
+C:\Projetos Windows Forms\HydraSistemas\PDV\bin\Debug\PDV.exe
+C:\Projetos Windows Forms\HydraSistemas\PDV\bin\Debug\PDV.pdb
+C:\Projetos Windows Forms\HydraSistemas\PDV\bin\Debug\MaterialDesignColors.dll
+C:\Projetos Windows Forms\HydraSistemas\PDV\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Projetos Windows Forms\HydraSistemas\PDV\bin\Debug\MaterialDesignColors.pdb
+C:\Projetos Windows Forms\HydraSistemas\PDV\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Projetos Windows Forms\HydraSistemas\PDV\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV.csprojAssemblyReference.cache
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\MainWindow.g.cs
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\App.g.cs
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV_MarkupCompile.cache
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV_MarkupCompile.lref
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\MainWindow.baml
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV.g.resources
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV.Properties.Resources.resources
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV.csproj.GenerateResource.cache
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV.csproj.CoreCompileInputs.cache
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV.csproj.CopyComplete
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV.exe
+C:\Projetos Windows Forms\HydraSistemas\PDV\obj\Debug\PDV.pdb
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\bin\Debug\PDV.exe.config
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\bin\Debug\PDV.exe
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\bin\Debug\PDV.pdb
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\bin\Debug\MaterialDesignColors.dll
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\bin\Debug\MaterialDesignColors.pdb
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV.csprojAssemblyReference.cache
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\MainWindow.g.cs
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\App.g.cs
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV_MarkupCompile.cache
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV_MarkupCompile.lref
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\MainWindow.baml
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV.g.resources
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV.Properties.Resources.resources
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV.csproj.GenerateResource.cache
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV.csproj.CoreCompileInputs.cache
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV.csproj.CopyComplete
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV.exe
+C:\Projetos Windows Forms\GitHub\Hydra\Hydra\PDV\obj\Debug\PDV.pdb
