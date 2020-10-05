@@ -46,15 +46,15 @@ namespace HydraSistemas.Formularios
         //metodo para filtrar produto pelo nome, e exibir equanto escreve
         public void filtrar(DataGridView data, string BuscarNome)
         {
-                SqlCommand sql = new SqlCommand("filtro_BuscarProduto", Context.con());
-                sql.CommandType = CommandType.StoredProcedure;
-                sql.Parameters.Add("@filtro", SqlDbType.VarChar, 200).Value = BuscarNome;
+            SqlCommand sql = new SqlCommand("filtro_BuscarProduto", Context.con());
+            sql.CommandType = CommandType.StoredProcedure;
+            sql.Parameters.Add("@filtro", SqlDbType.VarChar, 200).Value = BuscarNome;
 
-                sql.ExecuteNonQuery();
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter(sql);
-                da.Fill(dt);
-                data.DataSource = dt;
+            sql.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(sql);
+            da.Fill(dt);
+            data.DataSource = dt;
         }
 
         private void txtNomeProduto_TextChanged_1(object sender, EventArgs e)

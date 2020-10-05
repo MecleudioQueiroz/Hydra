@@ -1707,12 +1707,16 @@
         </member>
         <member name="M:Npgsql.NpgsqlConnection.ClearPool(Npgsql.NpgsqlConnection)">
             <summary>
-            Clear connection pool.
+            Clears the connection pool. All idle physical connections in the pool of the given connection are
+            immediately closed, and any busy connections which were opened before <see cref="M:Npgsql.NpgsqlConnection.ClearPool(Npgsql.NpgsqlConnection)"/> was called
+            will be closed when returned to the pool.
             </summary>
         </member>
         <member name="M:Npgsql.NpgsqlConnection.ClearAllPools">
             <summary>
-            Clear all connection pools.
+            Clear all connection pools. All idle physical connections in all pools are immediately closed, and any busy
+            connections which were opened before <see cref="M:Npgsql.NpgsqlConnection.ClearAllPools"/> was called will be closed when returned
+            to their pool.
             </summary>
         </member>
         <member name="M:Npgsql.NpgsqlConnection.UnprepareAll">
@@ -1952,6 +1956,17 @@
         <member name="P:Npgsql.NpgsqlConnectionStringBuilder.PersistSecurityInfo">
             <summary>
             Gets or sets a Boolean value that indicates if security-sensitive information, such as the password, is not returned as part of the connection if the connection is open or has ever been in an open state.
+            </summary>
+        </member>
+        <member name="P:Npgsql.NpgsqlConnectionStringBuilder.LogParameters">
+            <summary>
+            When enabled, parameter values are logged when commands are executed. Defaults to false.
+            </summary>
+        </member>
+        <member name="P:Npgsql.NpgsqlConnectionStringBuilder.IncludeErrorDetails">
+            <summary>
+            When enabled, PostgreSQL error details are included on <see cref="P:Npgsql.PostgresException.Detail" /> and
+            <see cref="P:Npgsql.PostgresNotice.Detail" />. These can contain sensitive data.
             </summary>
         </member>
         <member name="P:Npgsql.NpgsqlConnectionStringBuilder.Pooling">
@@ -3384,7 +3399,7 @@
         </member>
         <member name="P:Npgsql.NpgsqlException.IsTransient">
             <summary>
-            Specifies whether the exception is considered transient, that is, whether retrying to operation could
+            Specifies whether the exception is considered transient, that is, whether retrying the operation could
             succeed (e.g. a network error or a timeout).
             </summary>
         </member>
@@ -4347,11 +4362,6 @@
             Provides methods which decode different values types and tracks the current position.
             </summary>
         </member>
-        <member name="P:Npgsql.NpgsqlReadBuffer.AwaitableSocket">
-            <summary>
-            Wraps SocketAsyncEventArgs for better async I/O as long as we're not doing SSL.
-            </summary>
-        </member>
         <member name="P:Npgsql.NpgsqlReadBuffer.Size">
             <summary>
             The total byte length of the buffer.
@@ -4670,11 +4680,6 @@
             Provides methods which encode different values types and tracks the current position.
             </summary>
         </member>
-        <member name="P:Npgsql.NpgsqlWriteBuffer.AwaitableSocket">
-            <summary>
-            Wraps SocketAsyncEventArgs for better async I/O as long as we're not doing SSL.
-            </summary>
-        </member>
         <member name="P:Npgsql.NpgsqlWriteBuffer.Size">
             <summary>
             The total byte length of the buffer.
@@ -4935,9 +4940,9 @@
              </summary>
              <remarks>
              This exception only corresponds to a PostgreSQL-delivered error.
-             Other errors (e.g. network issues) will be raised via <see cref="T:Npgsql.NpgsqlException"/>,
+             Other errors (e.g. network issues) will be raised via <see cref="T:Npgsql.NpgsqlException" />,
              and purely Npgsql-related issues which aren't related to the server will be raised
-             via the standard CLR exceptions (e.g. ArgumentException).
+             via the standard CLR exceptions (e.g. <see cref="T:System.ArgumentException" />).
             
              See http://www.postgresql.org/docs/current/static/errcodes-appendix.html,
              http://www.postgresql.org/docs/current/static/protocol-error-fields.html
@@ -4952,6 +4957,11 @@
             </remarks>
         </member>
         <member name="M:Npgsql.PostgresException.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="M:Npgsql.PostgresException.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Creates a new instance.
             </summary>
@@ -4973,7 +4983,7 @@
         </member>
         <member name="P:Npgsql.PostgresException.IsTransient">
             <summary>
-            Specifies whether the exception is considered transient, that is, whether retrying to operation could
+            Specifies whether the exception is considered transient, that is, whether retrying the operation could
             succeed (e.g. a network error). Check <see cref="P:Npgsql.PostgresException.SqlState"/>.
             </summary>
         </member>
@@ -5265,6 +5275,11 @@
             Creates a new instance.
             </summary>
         </member>
+        <member name="M:Npgsql.PostgresNotice.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
         <member name="T:Npgsql.NpgsqlNoticeEventArgs">
             <summary>
             Provides data for a PostgreSQL notice event.
@@ -5534,18 +5549,9 @@
             a temporary state during preparation.
             </summary>
         </member>
-        <member name="F:Npgsql.PreparedState.ToBePrepared">
-            <summary>
-            The statement has been selected for preparation, but the preparation hasn't started yet.
-            This is a temporary state that only occurs during preparation, and indicates that no
-            no protocol message (Parse) has been sent yet.
-            </summary>
-        </member>
         <member name="F:Npgsql.PreparedState.BeingPrepared">
             <summary>
-            The statement is in the process of being prepared. This is a temporary state that only occurs during
-            preparation, and indicates that a Parse protocol message for the statement has already been written
-            to the write buffer.
+            The statement is in the process of being prepared.
             </summary>
         </member>
         <member name="F:Npgsql.PreparedState.Prepared">
@@ -5685,10 +5691,13 @@
         <member name="M:Npgsql.TypeHandlers.ArrayHandler`1.#ctor(Npgsql.PostgresTypes.PostgresType,Npgsql.TypeHandling.NpgsqlTypeHandler,System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Npgsql.TypeHandlers.ArrayHandler`1.Read``1(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
+            <inheritdoc />
+        </member>
         <member name="M:Npgsql.TypeHandlers.ArrayHandler`1.Read``1(Npgsql.NpgsqlReadBuffer,System.Int32,System.Boolean,Npgsql.BackendMessages.FieldDescription)">
             <inheritdoc />
         </member>
-        <member name="M:Npgsql.TypeHandlers.ArrayHandler`1.ReadArray``1(Npgsql.NpgsqlReadBuffer,System.Boolean)">
+        <member name="M:Npgsql.TypeHandlers.ArrayHandler`1.ReadArray``1(Npgsql.NpgsqlReadBuffer,System.Boolean,System.Int32)">
             <summary>
             Reads an array of element type <typeparamref name="TAnyElement"/> from the given buffer <paramref name="buf"/>.
             </summary>
@@ -5901,6 +5910,11 @@
             a DateTime is requested
             </summary>
         </member>
+        <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.DateHandler.#ctor(Npgsql.PostgresTypes.PostgresType,System.Boolean)">
+            <summary>
+            Constructs a <see cref="T:Npgsql.TypeHandlers.DateTimeHandlers.DateHandler"/>
+            </summary>
+        </member>
         <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.DateHandler.Read(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
             <inheritdoc />
         </member>
@@ -5948,6 +5962,11 @@
              Use it at your own risk.
              </remarks>
         </member>
+        <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.IntervalHandler.#ctor(Npgsql.PostgresTypes.PostgresType)">
+            <summary>
+            Constructs an <see cref="T:Npgsql.TypeHandlers.DateTimeHandlers.IntervalHandler"/>
+            </summary>
+        </member>
         <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.IntervalHandler.Read(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
             <inheritdoc />
         </member>
@@ -5993,6 +6012,11 @@
              Use it at your own risk.
              </remarks>
         </member>
+        <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.TimeHandler.#ctor(Npgsql.PostgresTypes.PostgresType)">
+            <summary>
+            Constructs a <see cref="T:Npgsql.TypeHandlers.DateTimeHandlers.TimeHandler"/>.
+            </summary>
+        </member>
         <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.TimeHandler.Read(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
             <inheritdoc />
         </member>
@@ -6033,6 +6057,11 @@
             <summary>
             Whether to convert positive and negative infinity values to DateTime.{Max,Min}Value when
             a DateTime is requested
+            </summary>
+        </member>
+        <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.TimestampHandler.#ctor(Npgsql.PostgresTypes.PostgresType,System.Boolean)">
+            <summary>
+            Constructs a <see cref="T:Npgsql.TypeHandlers.DateTimeHandlers.TimestampHandler"/>.
             </summary>
         </member>
         <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.TimestampHandler.Read(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
@@ -6085,6 +6114,11 @@
              Use it at your own risk.
              </remarks>
         </member>
+        <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.TimestampTzHandler.#ctor(Npgsql.PostgresTypes.PostgresType,System.Boolean)">
+            <summary>
+            Constructs an <see cref="T:Npgsql.TypeHandlers.DateTimeHandlers.TimestampTzHandler"/>.
+            </summary>
+        </member>
         <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.TimestampTzHandler.Read(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
             <inheritdoc />
         </member>
@@ -6129,6 +6163,11 @@
              should be considered somewhat unstable, and  may change in breaking ways, including in non-major releases.
              Use it at your own risk.
              </remarks>
+        </member>
+        <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.TimeTzHandler.#ctor(Npgsql.PostgresTypes.PostgresType)">
+            <summary>
+            Constructs an <see cref="T:Npgsql.TypeHandlers.DateTimeHandlers.TimeTzHandler"/>.
+            </summary>
         </member>
         <member name="M:Npgsql.TypeHandlers.DateTimeHandlers.TimeTzHandler.Read(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
             <inheritdoc />
@@ -6491,10 +6530,10 @@
         <member name="M:Npgsql.TypeHandlers.InternalCharHandler.Read(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
             <inheritdoc />
         </member>
-        <member name="M:Npgsql.TypeHandlers.InternalCharHandler.ValidateAndGetLength(System.Char,Npgsql.NpgsqlParameter)">
+        <member name="M:Npgsql.TypeHandlers.InternalCharHandler.ValidateAndGetLength(System.Byte,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
-        <member name="M:Npgsql.TypeHandlers.InternalCharHandler.ValidateAndGetLength(System.Byte,Npgsql.NpgsqlParameter)">
+        <member name="M:Npgsql.TypeHandlers.InternalCharHandler.ValidateAndGetLength(System.Char,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.InternalCharHandler.ValidateAndGetLength(System.Int16,Npgsql.NpgsqlParameter)">
@@ -6771,25 +6810,25 @@
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Int16,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
-        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Int32,Npgsql.NpgsqlParameter)">
-            <inheritdoc />
-        </member>
-        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Int64,Npgsql.NpgsqlParameter)">
-            <inheritdoc />
-        </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Byte,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.SByte,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Decimal,Npgsql.NpgsqlParameter)">
+            <inheritdoc />
+        </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Int32,Npgsql.NpgsqlParameter)">
+            <inheritdoc />
+        </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Int64,Npgsql.NpgsqlParameter)">
+            <inheritdoc />
+        </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Single,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Double,Npgsql.NpgsqlParameter)">
-            <inheritdoc />
-        </member>
-        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.ValidateAndGetLength(System.Decimal,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int16Handler.Write(System.Int16,Npgsql.NpgsqlWriteBuffer,Npgsql.NpgsqlParameter)">
@@ -6840,6 +6879,12 @@
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int32Handler.ValidateAndGetLength(System.Int16,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int32Handler.ValidateAndGetLength(System.Byte,Npgsql.NpgsqlParameter)">
+            <inheritdoc />
+        </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int32Handler.ValidateAndGetLength(System.Decimal,Npgsql.NpgsqlParameter)">
+            <inheritdoc />
+        </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int32Handler.ValidateAndGetLength(System.Int64,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
@@ -6847,12 +6892,6 @@
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int32Handler.ValidateAndGetLength(System.Double,Npgsql.NpgsqlParameter)">
-            <inheritdoc />
-        </member>
-        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int32Handler.ValidateAndGetLength(System.Decimal,Npgsql.NpgsqlParameter)">
-            <inheritdoc />
-        </member>
-        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int32Handler.ValidateAndGetLength(System.Byte,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int32Handler.Write(System.Int32,Npgsql.NpgsqlWriteBuffer,Npgsql.NpgsqlParameter)">
@@ -6897,22 +6936,22 @@
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Int64,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Int32,Npgsql.NpgsqlParameter)">
+            <inheritdoc />
+        </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Int16,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
-        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Int32,Npgsql.NpgsqlParameter)">
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Byte,Npgsql.NpgsqlParameter)">
+            <inheritdoc />
+        </member>
+        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Decimal,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Single,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Double,Npgsql.NpgsqlParameter)">
-            <inheritdoc />
-        </member>
-        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Decimal,Npgsql.NpgsqlParameter)">
-            <inheritdoc />
-        </member>
-        <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.ValidateAndGetLength(System.Byte,Npgsql.NpgsqlParameter)">
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.NumericHandlers.Int64Handler.Write(System.Int64,Npgsql.NpgsqlWriteBuffer,Npgsql.NpgsqlParameter)">
@@ -7114,6 +7153,9 @@
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.RangeHandler`1.CreateArrayHandler(Npgsql.PostgresTypes.PostgresArrayType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Npgsql.TypeHandlers.RangeHandler`1.Read``1(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
             <inheritdoc />
         </member>
         <member name="M:Npgsql.TypeHandlers.RangeHandler`1.Read``1(Npgsql.NpgsqlReadBuffer,System.Int32,System.Boolean,Npgsql.BackendMessages.FieldDescription)">
@@ -7785,6 +7827,9 @@
             <param name="fieldDescription">Additional PostgreSQL information about the type, such as the length in varchar(30).</param>
             <returns>The fully-read value.</returns>
         </member>
+        <member name="M:Npgsql.TypeHandling.NpgsqlTypeHandler`1.Read``1(Npgsql.NpgsqlReadBuffer,System.Int32,Npgsql.BackendMessages.FieldDescription)">
+            <inheritdoc />
+        </member>
         <member name="M:Npgsql.TypeHandling.NpgsqlTypeHandler`1.ValidateAndGetLength(`0,Npgsql.NpgsqlLengthCache@,Npgsql.NpgsqlParameter)">
             <summary>
             Called to validate and get the length of a value of a generic <see cref="T:Npgsql.NpgsqlParameter`1"/>.
@@ -8202,14 +8247,14 @@
         </member>
         <member name="M:NpgsqlTypes.NpgsqlDateTime.Add(NpgsqlTypes.NpgsqlTimeSpan)">
             <summary>
-            Returns a new <see cref="T:NpgsqlTypes.NpgsqlDateTime"/> that adds the value of the specified TimeSpan to the value of this instance.
+            Returns a new <see cref="T:NpgsqlTypes.NpgsqlDateTime"/> that adds the value of the specified <see cref="T:NpgsqlTypes.NpgsqlTimeSpan"/> to the value of this instance.
             </summary>
-            <param name="value">A positive or negative time interval.</param>
+            <param name="value">An NpgsqlTimeSpan interval.</param>
             <returns>An object whose value is the sum of the date and time represented by this instance and the time interval represented by value.</returns>
         </member>
         <member name="M:NpgsqlTypes.NpgsqlDateTime.Add(System.TimeSpan)">
             <summary>
-            Returns a new <see cref="T:NpgsqlTypes.NpgsqlDateTime"/> that adds the value of the specified <see cref="T:NpgsqlTypes.NpgsqlTimeSpan"/> to the value of this instance.
+            Returns a new <see cref="T:NpgsqlTypes.NpgsqlDateTime"/> that adds the value of the specified TimeSpan to the value of this instance.
             </summary>
             <param name="value">A positive or negative time interval.</param>
             <returns>An object whose value is the sum of the date and time represented by this instance and the time interval represented by value.</returns>
